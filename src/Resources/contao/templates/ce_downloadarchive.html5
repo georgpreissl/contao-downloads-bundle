@@ -1,0 +1,56 @@
+<section class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<?php if ($this->headline): ?>
+
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+
+	<div class="downloadarchivList block">
+
+		<?php if(is_array($this->arrFiles)): 
+
+		foreach($this->arrFiles as $row): ?>
+			<?php 
+
+				// printf('<pre>%s</pre>', print_r($row,true));
+			 ?>
+			<div class="downloadarchivItem cf block <?php echo $row['css']; ?>">
+				
+				<div class="dla_inner cf">
+					<div class="dla_image">
+						<?php if($row['addImage'] == "1"): ?>
+						<div class="dla_pic">
+							<img src="<?= $row['imgSRC']; ?>" alt="<?= $row['alt']; ?>">
+						</div>
+						<?php else: ?>
+						<div class="dla_icon">
+							<img src="files/theme/img/icons/icon-download-<?= $row['extension']; ?>.svg" alt="">
+						</div>
+						<?php endif; ?>
+					</div>
+					<div class="dla_info">
+						<h5 class="dla_title"><?php echo $row['title']; ?></h5>
+						<?php if($row['description'] != ""): ?>
+							<div class="dla_description"><?php echo $row['description']; ?></div>
+						<?php endif; ?>
+						<p class="dla_meta"><?= strtoupper($row['extension']); ?>, Dateigröße: <?= str_replace('MiB', 'MB', $row['size']); ?></p>
+					</div>
+				</div>
+				<a class="dla_button" href="<?php echo $row['href']; ?>">Download</a>
+
+
+
+
+		
+
+
+			</div>
+		<?php endforeach; 
+		else: ?>
+			<div class="downloadarchivItem block">
+			<?php echo $this->arrFiles; ?>
+			</div>
+		<?php endif; ?>
+	</div>
+	
+	<?php echo $this->pagination; ?>
+</section>
