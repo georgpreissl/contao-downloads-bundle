@@ -11,15 +11,10 @@ use GeorgPreissl\Downloads\ContentDownloadarchive;
 /**
  * Add back end modules
  */
-
-
-ArrayUtil::arrayInsert($GLOBALS['BE_MOD']['content'], 1, array
+$GLOBALS['BE_MOD']['content']['downloads'] = array
 (
-	'downloads' => array
-	(
-		'tables' => array('tl_downloadarchive', 'tl_downloadarchiveitems')
-	)
-));
+	'tables' => array('tl_downloadarchive', 'tl_downloadarchiveitems')
+);
 
 
 
