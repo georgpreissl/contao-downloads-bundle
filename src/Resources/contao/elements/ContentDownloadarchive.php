@@ -151,6 +151,7 @@ class ContentDownloadarchive extends ContentElement
 	 */
 	protected function compile()
 	{
+		$rootDir = System::getContainer()->getParameter('kernel.project_dir');
 		global $objPage;
         // $this->import('StringUtil');
 		
@@ -214,11 +215,12 @@ class ContentDownloadarchive extends ContentElement
 
                     if (is_file($rootDir . '/' . $objModel->path))
                     {
-                        $size = deserialize($arrFile['size']);
+                        $size = StringUtil::deserialize($arrFile['size']);
                        
                         
                         // $arrFile['imgSRC'] = $arrFile['imgSrc'] = \Image::get($objModel->path,$size[0],$size[1],$size[2]);
-                        $arrFile['imgSRC'] = $arrFile['imgSrc'] = Image::get($objModel->path, 150, '', '');
+                        // $arrFile['imgSRC'] = $arrFile['imgSrc'] = Image::get($objModel->path, 150, '', '');
+						$arrFile['imgSRC'] = $objModel->path;
 
                         // Image dimensions
                         if (($imgSize = @getimagesize($rootDir .'/'. rawurldecode($arrFile['imgSRC']))) !== false)
@@ -228,12 +230,12 @@ class ContentDownloadarchive extends ContentElement
                         }
 
                         $arrFile['imgHref'] = $objModel->path;
-                        $arrFile['alt'] = specialchars($arrFile['alt']);
-                        $arrFile['imagemargin'] = $this->generateMargin(deserialize($arrFile['imagemargin']), 'padding');
+                        $arrFile['alt'] = StringUtil::specialchars($arrFile['alt']);
+                        // $arrFile['imagemargin'] = $this->generateMargin(deserialize($arrFile['imagemargin']), 'padding');
                         $arrFile['floating'] = in_array($arrFile['floating'], array('left', 'right')) ? sprintf(' float:%s;', $arrFile['floating']) : '';
                         $arrFile['addImage'] = true;
 
-                        $arrFile['lightbox'] = ($objPage->outputFormat == 'xhtml' || VERSION < 2.11) ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
+                        // $arrFile['lightbox'] = ($objPage->outputFormat == 'xhtml' || VERSION < 2.11) ? ' rel="' . $strLightboxId . '"' : ' data-lightbox="' . substr($strLightboxId, 9, -1) . '"';
 
                     }
                 }
