@@ -210,7 +210,7 @@ class ContentDownloadarchive extends ContentElement
                 // Add an image selected by the user
                 if ($arrFile['addImage'] && $arrFile['imgSRC'] != '')
                 {
-                    $objModel = \FilesModel::findByUuid($arrFile['imgSRC']);
+                    $objModel = FilesModel::findByUuid($arrFile['imgSRC']);
 
                     if (is_file($rootDir . '/' . $objModel->path))
                     {
